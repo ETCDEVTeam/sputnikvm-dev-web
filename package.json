@@ -9,14 +9,14 @@
     "clean:haskell": "cabal clean",
     "clean:dist": "rm -rf dist",
     "clean:all": "npm run clean:haskell && npm run clean:dist",
-    "build:js": "make build && npm run copy:stackbuild && npm run uglify",
+    "build:js": "make config && make build && npm run copy:stackbuild && npm run uglify",
     "build:js-dev": "make build && npm run copy:stackbuild",
     "build:css": "npm run scss && npm run autoprefixer",
     "build:dist": "mkdir -p dist/html/ && npm run build:js && npm run build:css",
     "serve": "browser-sync start --server 'dist/html/' --files 'dist/html/css/*.css, dist/html/*.js, **/*.html, !node_modules/**/*.html'",
     "watch:index": "onchange 'app/Main.hs' -- npm run build:js-dev",
     "watch:css": "onchange 'static/scss/*.scss' -- npm run build:css",
-    "watch:all": "npm-run-all -p serve watch:index watch:css"
+    "watch:all": "make config && npm-run-all -p serve watch:index watch:css"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",

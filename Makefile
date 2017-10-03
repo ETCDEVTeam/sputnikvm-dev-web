@@ -3,8 +3,11 @@
 shell:
 	reflex-platform/work-on ghcjs ./.
 
+config:
+	cabal configure --ghcjs
+
 build:
-	cabal configure --ghcjs && cabal build
+	cabal build
 
 dist:
 	npm run build:dist
