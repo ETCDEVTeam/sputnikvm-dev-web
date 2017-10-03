@@ -6,5 +6,8 @@ shell:
 build:
 	cabal configure --ghcjs && cabal build
 
-serve: build
-	cd dist/build/svmdev-web/svmdev-web.jsexe && python -m SimpleHTTPServer 8000
+dist:
+	npm run build:dist
+
+watch: dist
+	npm run watch:all
