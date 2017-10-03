@@ -11,3 +11,6 @@ dist:
 
 watch: dist
 	npm run watch:all
+
+clean:
+	npm run clean:all
