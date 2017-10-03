@@ -1,8 +1,11 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings, RecursiveDo #-}
 
 import Reflex
 import Reflex.Dom
+import Control.Monad
+import Control.Monad.IO.Class
 import qualified Data.Map as Map
+import qualified Data.Text as T
 
 main :: IO ()
 main = mainWidgetWithHead headElement bodyElement
@@ -19,4 +22,12 @@ headElement = do
                                         ]) $ return ()
 
 bodyElement :: MonadWidget t m => m ()
-bodyElement = el "h1" (text "Hello, world!")
+bodyElement = do
+  el "h1" (text "SputnikVM Development Environment")
+  request <- do
+    rec transactionHash <- textInput $
+          def & setValue .~ fmap (\_ -> "") debugSend
+        debugSend <- button "Debug"
+    return $ ffilter (/="") $ tag (current (value transactionHash)) debugSend
+  response <- fmap (fmap _xhrResponse_responseText) $ performRequestAsync $ fmap (\_ -> XhrRequest "GET" "http://127.0.0.1:8545" def) request
+  dynText <=< holdDyn "" $ fmapMaybe id response
