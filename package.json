@@ -14,7 +14,7 @@
     "build:static": "mkdir -p dist/html && cp -r static/* dist/html/",
     "build:dist": "mkdir -p dist/html/ && npm run build:js && npm run build:css && npm run build:static",
     "serve": "browser-sync start --server 'dist/html/' --files 'dist/html/**/*, **/*.html, !node_modules/**/*.html'",
-    "watch:index": "onchange 'app/Main.hs' -- npm run build:js-dev",
+    "watch:index": "onchange 'app/**/*.hs' -- npm run build:js-dev",
     "watch:css": "onchange 'scss/*.scss' -- npm run build:css",
     "watch:static": "onchange 'static/**/*' -- npm run build:static",
     "watch:all": "make config && npm-run-all -p serve watch:index watch:css watch:static"
