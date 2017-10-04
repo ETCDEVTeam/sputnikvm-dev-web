@@ -4,4 +4,9 @@ $font-family-sans-serif: "Rosario", Arial, sans-serif;
 $font-family-serif:     Georgia, serif;
 $font-family-base:      $font-family-sans-serif;
 
+@import "variables";
 @import "base";
+@import "layouts";
+@import "type";
+@import "paper";
+@import "inputs";
