@@ -2,8 +2,7 @@
   "name": "svmdev-web",
   "author": "Wei Tang",
   "scripts": {
-    "scss": "mkdir -p dist/html/ && node-sass --output-style compressed static/scss/style.scss dist/html/css/style.css",
-    "autoprefixer": "postcss -u autoprefixer -r dist/html/css/style.css dist/html/css/style.css",
+    "scss": "mkdir -p dist/html/ && node-sass --output-style compressed scss/style.scss dist/html/style.css",
     "uglify": "mkdir -p dist/html/ && uglifyjs dist/html/lib.js -o dist/html/lib.js -c -m && uglifyjs dist/html/rts.js -o dist/html/rts.js -c -m && uglifyjs dist/html/out.js -o dist/html/out.js -c -m",
     "copy:stackbuild": "mkdir -p dist/html/ && cp -R dist/build/svmdev-web/svmdev-web.jsexe/. dist/html",
     "clean:haskell": "cabal clean",
@@ -11,12 +10,14 @@
     "clean:all": "npm run clean:haskell && npm run clean:dist",
     "build:js": "make config && make build && npm run copy:stackbuild && npm run uglify",
     "build:js-dev": "make build && npm run copy:stackbuild",
-    "build:css": "npm run scss && npm run autoprefixer",
-    "build:dist": "mkdir -p dist/html/ && npm run build:js && npm run build:css",
-    "serve": "browser-sync start --server 'dist/html/' --files 'dist/html/css/*.css, dist/html/*.js, **/*.html, !node_modules/**/*.html'",
+    "build:css": "npm run scss",
+    "build:static": "mkdir -p dist/html && cp -r static/* dist/html/",
+    "build:dist": "mkdir -p dist/html/ && npm run build:js && npm run build:css && npm run build:static",
+    "serve": "browser-sync start --server 'dist/html/' --files 'dist/html/**/*, **/*.html, !node_modules/**/*.html'",
     "watch:index": "onchange 'app/Main.hs' -- npm run build:js-dev",
-    "watch:css": "onchange 'static/scss/*.scss' -- npm run build:css",
-    "watch:all": "make config && npm-run-all -p serve watch:index watch:css"
+    "watch:css": "onchange 'scss/*.scss' -- npm run build:css",
+    "watch:static": "onchange 'static/**/*' -- npm run build:static",
+    "watch:all": "make config && npm-run-all -p serve watch:index watch:css watch:static"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1",

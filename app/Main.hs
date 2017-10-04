@@ -10,10 +10,13 @@ import qualified Data.Text as T
 main :: IO ()
 main = mainWidgetWithHead headElement bodyElement
 
+title :: T.Text
+title = "SputnikVM Development Environment"
+
 headElement :: MonadWidget t m => m ()
 headElement = do
-  el "title" (text "SputnikVM Development Environment")
-  styleSheet "css/style.css"
+  el "title" (text title)
+  styleSheet "style.css"
   where
     styleSheet link = elAttr "link" (Map.fromList [
                                         ("rel", "stylesheet")
@@ -23,7 +26,7 @@ headElement = do
 
 bodyElement :: MonadWidget t m => m ()
 bodyElement = do
-  el "h1" (text "SputnikVM Development Environment")
+  el "h1" (text title)
   request <- do
     rec transactionHash <- textInput $
           def & setValue .~ fmap (\_ -> "") debugSend

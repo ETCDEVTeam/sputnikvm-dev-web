@@ -1,0 +1,7 @@
+@import url("fonts/rosario/stylesheet.css");
+
+$font-family-sans-serif: "Rosario", Arial, sans-serif;
+$font-family-serif:     Georgia, serif;
+$font-family-base:      $font-family-sans-serif;
+
+@import "base";
