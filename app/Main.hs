@@ -27,18 +27,22 @@ headElement = do
 bodyElement :: MonadWidget t m => m ()
 bodyElement = do
   descriptionElement
-  request <- do
-    rec transactionHash <- textInput $
-          def & setValue .~ fmap (\_ -> "") debugSend
-        debugSend <- button "Debug"
-    return $ ffilter (/="") $ tag (current (value transactionHash)) debugSend
-  response <- fmap (fmap _xhrResponse_responseText) $ performRequestAsync $ fmap requestFromHash request
-  dynText <=< holdDyn "" $ fmapMaybe id response
+  response <- actionElement
+  el "p" $ dynText <=< holdDyn "" $ response
 
 descriptionElement :: MonadWidget t m => m ()
 descriptionElement = do
   el "h1" (text title)
   el "p" (text "Enter a valid transaction hash below to get its debug information.")
+
+actionElement :: MonadWidget t m => m (Event t T.Text)
+actionElement = do
+  request <- do
+    rec transactionHash <- textInput $
+          def & setValue .~ fmap (\_ -> "") debugSend
+        debugSend <- button "Debug"
+    return $ ffilter (/="") $ tag (current (value transactionHash)) debugSend
+  fmap (fmapMaybe _xhrResponse_responseText) $ performRequestAsync $ fmap requestFromHash request
 
 requestFromHash :: T.Text -> XhrRequest T.Text
 requestFromHash hash =
