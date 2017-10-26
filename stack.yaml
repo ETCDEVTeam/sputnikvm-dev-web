@@ -1,0 +1,13 @@
+resolver: ghc-8.0.2
+
+nix:
+  enable: false
+system-ghc: true
+
+skip-ghc-check: true
+
+packages:
+- '.'
+
+extra-deps:
+  - ghcjs-base-stub-0.1.0.4

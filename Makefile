@@ -1,7 +1,7 @@
 .PHONY: shell build
 
 shell:
-	reflex-platform/work-on ghcjs ./.
+	nix-shell
 
 config:
 	cabal configure --ghcjs
