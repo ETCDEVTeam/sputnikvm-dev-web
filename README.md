@@ -18,6 +18,11 @@ Have `svmdev` open. Then go to `http://localhost:3000` to interact
 with the interface. Currently, enter a transaction hash, and click
 "Debug", it will show the debug information of that transaction.
 
+## Development with Emacs
+
+This package comes with `intero` support. To use it, simply run Emacs
+inside `nix-shell`.
+
 ## Build Minified Version
 
 ```
