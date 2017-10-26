@@ -1,11 +1,19 @@
 {-# LANGUAGE OverloadedStrings, RecursiveDo #-}
 
+module Main where
+
 import Reflex
 import Reflex.Dom
 import Control.Monad
 import Control.Monad.IO.Class
 import qualified Data.Map as Map
 import qualified Data.Text as T
+
+import Debug
+import Debug.Step (DebugStep)
+import qualified Debug.Step as Step
+import Debug.Trace (DebugTrace)
+import qualified Debug.Trace as Trace
 
 main :: IO ()
 main = mainWidgetWithHead headElement bodyElement
