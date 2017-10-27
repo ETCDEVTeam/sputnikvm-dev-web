@@ -6,14 +6,13 @@ import Reflex
 import Reflex.Dom
 import Control.Monad
 import Control.Monad.IO.Class
+import Data.Either
 import qualified Data.Map as Map
 import qualified Data.Text as T
 
 import Debug
 import Debug.Step (DebugStep)
-import qualified Debug.Step as Step
 import Debug.Trace (DebugTrace)
-import qualified Debug.Trace as Trace
 
 main :: IO ()
 main = mainWidgetWithHead headElement bodyElement
@@ -36,7 +35,7 @@ bodyElement :: MonadWidget t m => m ()
 bodyElement = do
   descriptionElement
   response <- actionElement
-  el "p" $ dynText <=< holdDyn "" $ response
+  el "p" $ dynText <=< holdDyn "" $ fmap (T.pack . show . (fmap rpcResponseData) . decodeDebugTrace) response
 
 descriptionElement :: MonadWidget t m => m ()
 descriptionElement = do

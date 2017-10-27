@@ -5,6 +5,8 @@ module Debug.Trace where
 import Data.Aeson
 import GHC.Generics
 import Data.Text (Text)
+import Data.Text.Lazy (fromStrict)
+import Data.Text.Lazy.Encoding (encodeUtf8)
 import Debug.Step (DebugStep)
 
 data DebugTrace =

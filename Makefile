@@ -1,4 +1,4 @@
-.PHONY: shell build
+.PHONY: shell build dist watch clean
 
 shell:
 	nix-shell
