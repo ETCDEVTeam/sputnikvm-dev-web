@@ -9,6 +9,8 @@ will be bundled together with the `svmdev` executable.
 First, clone this repository with its git submodules.
 
 ```
+git clone https://github.com/ETCDEVTeam/sputnikvm-dev-web.git --recursive 
+cd sputnikvm-dev-web
 npm install
 make shell
 make watch
